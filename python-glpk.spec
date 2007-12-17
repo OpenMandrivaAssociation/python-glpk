@@ -10,7 +10,6 @@ License: GPL
 URL: 	 http://nexedi.com/
 Group: 	 Development/Python
 Source0: python-glpk-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 Requires: python >= 2.2
 BuildRequires: python-devel, libglpk-devel, swig
 
