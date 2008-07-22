@@ -1,6 +1,6 @@
 %define name python-glpk
 %define version 0.4
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary: Python extension module for GLPK
 Name: 	 %{name}
