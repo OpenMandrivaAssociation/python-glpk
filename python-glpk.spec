@@ -7,6 +7,7 @@ Summary: A simple Python interface to GLPK
 Name: %{name}
 Version: %{version}
 Release: %{release}
+Epoch:	 %{epoch}
 Source0: %{name}-%{version}.tar.lzma
 Patch0: Makefile.patch
 License: GPLv2
