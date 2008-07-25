@@ -1,37 +1,43 @@
 %define name python-glpk
-%define version 0.4
-%define release %mkrel 4
+%define version 0.1.16
+%define release %mkrel 1
+%define epoch 1
 
-Summary: Python extension module for GLPK
-Name: 	 %{name}
+Summary: A simple Python interface to GLPK
+Name: %{name}
 Version: %{version}
 Release: %{release}
-License: GPL
-URL: 	 http://nexedi.com/
-Group: 	 Development/Python
-Source0: python-glpk-%{version}.tar.bz2
-BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
-Requires: python >= 2.2
-BuildRequires: python-devel, libglpk-devel, swig
+Source0: %{name}-%{version}.tar.lzma
+Patch0: Makefile.patch
+License: GPLv2
+Group: Development/Python
+Url: http://www.dcc.fc.up.pt/~jpp/code/python-glpk/
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Requires: libglpk0
+BuildRequires: python-devel >= 2.5, glpk-devel, swig
 
 %description
-A extension module for GNU Linear Programming Kit to Python.
+A simple Python interface to GLPK.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
-python setup.py build
+%make
 
 %install
-rm -rf %{buildroot}
-python setup.py install --root=%{buildroot} --record=INSTALLED_FILES
+%__rm -rf %{buildroot}
+%__install -m 755 -d %{buildroot}%{py_sitedir}
+%__install -m 755 *.so %{buildroot}%{py_sitedir}
+%__install -m 644 *.py %{buildroot}%{py_sitedir}
 
 %clean
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 
-%files -f INSTALLED_FILES
-%defattr(-, root, root)
-%doc PKG-INFO README
+%files
+%defattr(-,root,root)
+%doc COPYING ChangeLog readme.txt examples/
+%py_sitedir/*glpk*
 
-
+%changelog
