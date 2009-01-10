@@ -1,6 +1,6 @@
 %define name python-glpk
 %define version 0.1.16
-%define release %mkrel 1
+%define release %mkrel 2
 %define epoch 1
 
 Summary: A simple Python interface to GLPK
@@ -14,15 +14,15 @@ License: GPLv2
 Group: Development/Python
 Url: http://www.dcc.fc.up.pt/~jpp/code/python-glpk/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires: libglpk0
-BuildRequires: python-devel >= 2.5, glpk-devel, swig
+BuildRequires: glpk-devel swig
+%py_requires -d
 
 %description
 A simple Python interface to GLPK.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p0 -b .build
 
 %build
 %make
@@ -40,5 +40,3 @@ A simple Python interface to GLPK.
 %defattr(-,root,root)
 %doc COPYING ChangeLog readme.txt examples/
 %py_sitedir/*glpk*
-
-%changelog
