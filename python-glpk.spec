@@ -1,6 +1,6 @@
 %define name python-glpk
 %define version 0.1.36
-%define release %mkrel 1
+%define release %mkrel 2
 %define epoch 1
 
 Summary:	A simple Python interface to GLPK
