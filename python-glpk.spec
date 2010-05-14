@@ -1,6 +1,6 @@
 %define name python-glpk
-%define version 0.1.36
-%define release %mkrel 2
+%define version 0.3.43
+%define release %mkrel 1
 %define epoch 1
 
 Summary:	A simple Python interface to GLPK
@@ -8,35 +8,36 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Epoch:		%{epoch}
-Source0:	%{name}-%{version}.tgz
+Source0:        http://www.dcc.fc.up.pt/~jpp/code/python-glpk/%{name}_%{version}.tar.gz
 Patch0:		Makefile.patch
 License:	GPLv2
 Group:		Development/Python
 Url:		http://www.dcc.fc.up.pt/~jpp/code/python-glpk/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	glpk-devel >= 4.36, swig
+Requires:	python-ply
+BuildRequires:	glpk-devel >= 4.43, swig
 %py_requires -d
 
 %description
 A simple Python interface to GLPK.
 
 %prep
-%setup -q
-%patch0 -p0 -b .build
+%setup -q -n %{name}_%{version}
+%patch0 -p1 
 
 %build
-%make
+%make -C src all
 
 %install
 %__rm -rf %{buildroot}
-%__install -m 755 -d %{buildroot}%{py_sitedir}
-%__install -m 755 *.so %{buildroot}%{py_sitedir}
-%__install -m 644 *.py %{buildroot}%{py_sitedir}
+pushd src
+%__python setup.py install --root=%{buildroot} --record=../FILE_LIST
+popd
 
 %clean
 %__rm -rf %{buildroot}
 
-%files
+%files -f FILE_LIST
 %defattr(-,root,root)
 %doc COPYING ChangeLog readme.txt examples/
-%py_sitedir/*glpk*
+
