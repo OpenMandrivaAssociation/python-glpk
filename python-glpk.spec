@@ -1,5 +1,5 @@
 %define name python-glpk
-%define version 0.3.43
+%define version 0.4.43
 %define release %mkrel 1
 %define epoch 1
 
@@ -8,7 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Epoch:		%{epoch}
-Source0:        http://www.dcc.fc.up.pt/~jpp/code/python-glpk/%{name}_%{version}.tar.gz
+Source0:        http://www.dcc.fc.up.pt/~jpp/code/python-glpk/%{name}-%{version}.tar.gz
 Patch0:		Makefile.patch
 License:	GPLv2
 Group:		Development/Python
@@ -22,7 +22,7 @@ BuildRequires:	glpk-devel >= 4.43, swig
 A simple Python interface to GLPK.
 
 %prep
-%setup -q -n %{name}_%{version}
+%setup -q -n %{name}-%{version}
 %patch0 -p1 
 
 %build
