@@ -31,7 +31,7 @@ A simple Python interface to GLPK.
 %install
 %__rm -rf %{buildroot}
 pushd src
-%__python setup.py install --root=%{buildroot} --record=../FILE_LIST
+PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=../FILE_LIST
 popd
 
 %clean
