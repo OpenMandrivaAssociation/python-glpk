@@ -1,0 +1,25 @@
+--- python-glpk_0.3.43/src/swig/Makefile.bak	2010-05-14 11:53:43.000000000 -0400
++++ python-glpk_0.3.43/src/swig/Makefile	2010-05-14 11:56:08.000000000 -0400
+@@ -1,4 +1,5 @@
+-PYVERS := $(shell pyversions -d)
++CFLAGS := $(shell python-config --cflags)
++LDFLAGS := $(shell python-config --ldflags)
+ DIR := $(shell basename `pwd`)
+ 
+ all:	_glpkpi.so glpkpi.py
+@@ -8,12 +9,12 @@
+ 	sed -i 's/:in /:_in /g' glpkpi.py
+ 
+ _glpkpi.so:	glpkpi.py glpkpi.o glpkpi_wrap.o
+-	gcc -Wall -shared glpkpi.o  glpkpi_wrap.o -lm -lglpk  -o _glpkpi.so
++	gcc $(CFLAGS) $(LDFLAGS) -Wall -shared glpkpi.o  glpkpi_wrap.o -lm -lglpk  -o _glpkpi.so
+ 
+ glpkpi.o:	glpkpi.c
+-	gcc -Wall -c -fPIC glpkpi.c -DHAVE_CONFIG_H -I/usr/include/$(PYVERS) -I/usr/lib/$(PYVERS)/config
++	gcc $(CFLAGS) $(LDFLAGS) -Wall -c -fPIC glpkpi.c -DHAVE_CONFIG_H
+ glpkpi_wrap.o:	glpkpi_wrap.c
+-	gcc -Wall -c -fPIC glpkpi_wrap.c -DHAVE_CONFIG_H -I/usr/include/$(PYVERS) -I/usr/lib/$(PYVERS)/config
++	gcc $(CFLAGS) $(LDFLAGS) -Wall -c -fPIC glpkpi_wrap.c -DHAVE_CONFIG_H 
+ glpkpi_wrap.c:	glpkpi.i glpkpi.c glpkpi.h Makefile
+ 	swig -python  glpkpi.i
+ 
