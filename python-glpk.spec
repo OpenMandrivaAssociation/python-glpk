@@ -12,7 +12,7 @@ Source0:        http://www.dcc.fc.up.pt/~jpp/code/python-glpk/%{name}-%{version}
 Patch0:		Makefile.patch
 License:	GPLv2
 Group:		Development/Python
-Url:		http://www.dcc.fc.up.pt/~jpp/code/python-glpk/
+Url:		https://www.dcc.fc.up.pt/~jpp/code/python-glpk/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	python-ply
 BuildRequires:	glpk-devel >= 4.43, swig
