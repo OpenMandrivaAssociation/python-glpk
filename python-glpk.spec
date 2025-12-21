@@ -15,6 +15,7 @@ Group:		Development/Python
 Url:		https://www.dcc.fc.up.pt/~jpp/code/python-glpk/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	python-ply
+BuildRequires:	make
 BuildRequires:	glpk-devel >= 4.43, swig
 %py_requires -d
 
